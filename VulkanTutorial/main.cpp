@@ -1,14 +1,14 @@
-//
-//  main.cpp
-//  VulkanTutorial
-//
-//  Created by Nathan Maillot on 05/03/2025.
-//
+#include "App.hpp"
 
-#include <iostream>
+int main(int ac, char **av, char **env) {
+    App *app = new App("Vulkan Tutorial", Version(1, 0, 0), "ETIB", Version(1, 0, 0));
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+    try {
+        app->run();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
