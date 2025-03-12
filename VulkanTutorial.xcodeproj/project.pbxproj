@@ -9,22 +9,32 @@
 /* Begin PBXBuildFile section */
 		BE06C99E2D78272000DB5601 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE06C99D2D78272000DB5601 /* libglfw.3.4.dylib */; };
 		BE06C9A02D7838D500DB5601 /* libvulkan.1.4.304.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE06C99F2D7838D500DB5601 /* libvulkan.1.4.304.dylib */; };
-		BE06C9A12D78396900DB5601 /* libvulkan.1.4.304.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE06C99F2D7838D500DB5601 /* libvulkan.1.4.304.dylib */; };
-		BE06C9A22D78396900DB5601 /* libglfw.3.4.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE06C99D2D78272000DB5601 /* libglfw.3.4.dylib */; };
+		BE06C9A12D78396900DB5601 /* libvulkan.1.4.304.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = BE06C99F2D7838D500DB5601 /* libvulkan.1.4.304.dylib */; };
+		BE06C9A22D78396900DB5601 /* libglfw.3.4.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = BE06C99D2D78272000DB5601 /* libglfw.3.4.dylib */; };
 		BE06D2812D7863AE00DB5601 /* libvulkan.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE06D2802D7863AE00DB5601 /* libvulkan.1.dylib */; };
-		BE06D2832D7863CB00DB5601 /* libvulkan.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE06D2822D7863CB00DB5601 /* libvulkan.1.dylib */; };
+		BE06D2832D7863CB00DB5601 /* libvulkan.1.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = BE06D2822D7863CB00DB5601 /* libvulkan.1.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BE06C9902D781E9600DB5601 /* CopyFiles */ = {
+		BE06C9902D781E9600DB5601 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE06C9A12D78396900DB5601 /* libvulkan.1.4.304.dylib in CopyFiles */,
-				BE06D2832D7863CB00DB5601 /* libvulkan.1.dylib in CopyFiles */,
-				BE06C9A22D78396900DB5601 /* libglfw.3.4.dylib in CopyFiles */,
+				BE06C9A12D78396900DB5601 /* libvulkan.1.4.304.dylib in Copy Files */,
+				BE06D2832D7863CB00DB5601 /* libvulkan.1.dylib in Copy Files */,
+				BE06C9A22D78396900DB5601 /* libglfw.3.4.dylib in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE06D5F32D7A18FE00DB5601 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = shaders;
+			dstSubfolderSpec = 7;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2640,12 +2650,37 @@
 		BE06D5D12D78908200DB5601 /* vk.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = vk.xml; sourceTree = "<group>"; };
 		BE06D5D32D78908200DB5601 /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
 		BE06D5D72D78945700DB5601 /* vulkan */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = vulkan; path = ../../VulkanSDK/1.4.304.1/macOS/Frameworks/vulkan.framework/Versions/A/vulkan; sourceTree = "<group>"; };
+		BE06D5E62D7A0FF900DB5601 /* compile.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = compile.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		BE06D5F62D7A191200DB5601 /* Exceptions for "CompiledShaders" folder in "Copy Files" phase from "VulkanTutorial" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = BE06D5F32D7A18FE00DB5601 /* CopyFiles */;
+			membershipExceptions = (
+				frag.spv,
+				vert.spv,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BE06C9942D781E9600DB5601 /* VulkanTutorial */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = VulkanTutorial;
+			sourceTree = "<group>";
+		};
+		BE06D5EF2D7A180300DB5601 /* CompiledShaders */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BE06D5F62D7A191200DB5601 /* Exceptions for "CompiledShaders" folder in "Copy Files" phase from "VulkanTutorial" target */,
+			);
+			path = CompiledShaders;
+			sourceTree = "<group>";
+		};
+		BE06D5F22D7A180800DB5601 /* PureShaders */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PureShaders;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -2671,9 +2706,12 @@
 				BE06D4302D788A6800DB5601 /* libMoltenVK.dylib */,
 				BE06D42E2D788A4000DB5601 /* libVkLayer_khronos_validation.dylib */,
 				BE06D2822D7863CB00DB5601 /* libvulkan.1.dylib */,
+				BE06D5E62D7A0FF900DB5601 /* compile.sh */,
 				BE06C9942D781E9600DB5601 /* VulkanTutorial */,
 				BE06C99C2D78272000DB5601 /* Frameworks */,
 				BE06C9932D781E9600DB5601 /* Products */,
+				BE06D5F22D7A180800DB5601 /* PureShaders */,
+				BE06D5EF2D7A180300DB5601 /* CompiledShaders */,
 			);
 			sourceTree = "<group>";
 		};
@@ -9396,7 +9434,8 @@
 			buildPhases = (
 				BE06C98E2D781E9600DB5601 /* Sources */,
 				BE06C98F2D781E9600DB5601 /* Frameworks */,
-				BE06C9902D781E9600DB5601 /* CopyFiles */,
+				BE06C9902D781E9600DB5601 /* Copy Files */,
+				BE06D5F32D7A18FE00DB5601 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -9404,6 +9443,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				BE06C9942D781E9600DB5601 /* VulkanTutorial */,
+				BE06D5EF2D7A180300DB5601 /* CompiledShaders */,
+				BE06D5F22D7A180800DB5601 /* PureShaders */,
 			);
 			name = VulkanTutorial;
 			packageProductDependencies = (

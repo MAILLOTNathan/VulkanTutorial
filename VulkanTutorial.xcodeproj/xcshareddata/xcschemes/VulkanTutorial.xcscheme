@@ -63,13 +63,18 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "PATH"
-            value = "/Users/neisan/VulkanSDK/1.4.304.1/bin:$PATH"
+            key = "VULKAN_SDK"
+            value = "/Users/neisan/VulkanSDK/1.4.304.1/macOS"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "VULKAN_SDK"
-            value = "/Users/neisan/VulkanSDK/1.4.304.1"
+            key = "PATH"
+            value = "$VULKAN_SDK/bin:$PATH"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "DYLD_LIBRARY_PATH"
+            value = "$VULKAN_SDK/lib:$DYLD_LIBRARY_PATH"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
