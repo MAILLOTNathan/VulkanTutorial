@@ -38,6 +38,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE9BB2732D82B2F3000E74D5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = textures;
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -2662,6 +2671,13 @@
 				vert.spv,
 			);
 		};
+		BE9BB2792D82ECC5000E74D5 /* Exceptions for "PureTextures" folder in "Copy Files" phase from "VulkanTutorial" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = BE9BB2732D82B2F3000E74D5 /* CopyFiles */;
+			membershipExceptions = (
+				texture.jpg,
+			);
+		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -2681,6 +2697,14 @@
 		BE06D5F22D7A180800DB5601 /* PureShaders */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PureShaders;
+			sourceTree = "<group>";
+		};
+		BE9BB2722D82B26A000E74D5 /* PureTextures */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BE9BB2792D82ECC5000E74D5 /* Exceptions for "PureTextures" folder in "Copy Files" phase from "VulkanTutorial" target */,
+			);
+			path = PureTextures;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -2712,6 +2736,7 @@
 				BE06C9932D781E9600DB5601 /* Products */,
 				BE06D5F22D7A180800DB5601 /* PureShaders */,
 				BE06D5EF2D7A180300DB5601 /* CompiledShaders */,
+				BE9BB2722D82B26A000E74D5 /* PureTextures */,
 			);
 			sourceTree = "<group>";
 		};
@@ -9436,6 +9461,7 @@
 				BE06C98F2D781E9600DB5601 /* Frameworks */,
 				BE06C9902D781E9600DB5601 /* Copy Files */,
 				BE06D5F32D7A18FE00DB5601 /* CopyFiles */,
+				BE9BB2732D82B2F3000E74D5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -9445,6 +9471,7 @@
 				BE06C9942D781E9600DB5601 /* VulkanTutorial */,
 				BE06D5EF2D7A180300DB5601 /* CompiledShaders */,
 				BE06D5F22D7A180800DB5601 /* PureShaders */,
+				BE9BB2722D82B26A000E74D5 /* PureTextures */,
 			);
 			name = VulkanTutorial;
 			packageProductDependencies = (
