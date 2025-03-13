@@ -27,6 +27,8 @@
     #define GLM_FORCE_DEPTH_ZERO_TO_ONE
     #include <glm/glm.hpp>
     #include <glm/gtc/matrix_transform.hpp>
+    #define GLM_ENABLE_EXPERIMENTAL
+    #include <glm/gtx/hash.hpp>
 
     #include <GLFW/glfw3native.h>
 
@@ -37,9 +39,13 @@
     #include <optional>
     #include <set>
     #include <chrono>
+    #include <unordered_map>
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
+
+const std::string MODEL_PATH = "models/viking_room.obj";
+const std::string TEXTURE_PATH = "textures/viking_room.png";
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -121,6 +127,10 @@ class App {
 
                 return attributeDescriptions;
             }
+            
+            bool operator==(const Vertex& other) const {
+                return pos == other.pos && color == other.color && texCoord == other.texCoord;
+            }
         };
 
     protected:
@@ -136,6 +146,11 @@ class App {
         std::vector<VkDescriptorSet> _descriptorSets;
 
         VkPipeline _graphicsPipeline;
+    
+        std::vector<Vertex> _vertices;
+        std::vector<uint32_t> _indices;
+        VkBuffer _vertexBuffer;
+        VkDeviceMemory _vertexBufferMemory;
 
         std::vector<VkFramebuffer> _swapChainFramebuffers;
         VkCommandPool _commandPool;
@@ -150,8 +165,6 @@ class App {
         VkDeviceMemory _depthImageMemory;
         VkImageView _depthImageView;
     
-        VkBuffer _vertexBuffer;
-        VkDeviceMemory _vertexBufferMemory;
         VkBuffer _indexBuffer;
         VkDeviceMemory _indexBufferMemory;
     
@@ -277,6 +290,19 @@ class App {
         VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
         VkFormat findDepthFormat();
         bool hasStencilComponent(VkFormat format);
+    
+        // Models
+        void loadModel();
 };
+
+namespace std {
+    template<> struct hash<App::Vertex> {
+        size_t operator()(App::Vertex const& vertex) const {
+            return ((hash<glm::vec3>()(vertex.pos) ^
+                   (hash<glm::vec3>()(vertex.color) << 1)) >> 1) ^
+                   (hash<glm::vec2>()(vertex.texCoord) << 1);
+        }
+    };
+}
 
 #endif
