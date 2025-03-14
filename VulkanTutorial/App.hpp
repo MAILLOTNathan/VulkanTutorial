@@ -8,7 +8,6 @@
 #ifndef _ETIB_APP_HPP_
 #define _ETIB_APP_HPP_
 
-    #include <vulkan/vulkan.h>
     #include "Utils.hpp"
     #include "Version.hpp"
 
@@ -23,23 +22,18 @@
     #define GLFW_EXPOSE_NATIVE_WIN32
 #endif
 
-    #define GLM_FORCE_RADIANS
-    #define GLM_FORCE_DEPTH_ZERO_TO_ONE
-    #include <glm/glm.hpp>
-    #include <glm/gtc/matrix_transform.hpp>
-    #define GLM_ENABLE_EXPERIMENTAL
-    #include <glm/gtx/hash.hpp>
-
     #include <GLFW/glfw3native.h>
 
     #include <iostream>
     #include <stdexcept>
     #include <cstdlib>
     #include <map>
-    #include <optional>
     #include <set>
     #include <chrono>
     #include <unordered_map>
+
+    #include "QueueFamilyIndices.hpp"
+    #include "Vertex.hpp"
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -72,15 +66,6 @@ class App {
 
         void run();
     
-        struct QueueFamilyIndices {
-            std::optional<uint32_t> graphicsFamily;
-            std::optional<uint32_t> presentFamily;
-
-            bool isComplete() {
-                return graphicsFamily.has_value() && presentFamily.has_value();
-            }
-        };
-    
         struct SwapChainSupportDetails {
             VkSurfaceCapabilitiesKHR capabilities;
             std::vector<VkSurfaceFormatKHR> formats;
@@ -92,51 +77,12 @@ class App {
             glm::mat4 view;
             glm::mat4 proj;
         };
-    
-        struct Vertex {
-            glm::vec3 pos;
-            glm::vec3 color;
-            glm::vec2 texCoord;
-            
-            static VkVertexInputBindingDescription getBindingDescription() {
-                VkVertexInputBindingDescription bindingDescription{};
-                bindingDescription.binding = 0;
-                bindingDescription.stride = sizeof(Vertex);
-                bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-
-                return bindingDescription;
-            }
-            
-            static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() {
-                std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
-
-                attributeDescriptions[0].binding = 0;
-                attributeDescriptions[0].location = 0;
-                attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-                attributeDescriptions[0].offset = offsetof(Vertex, pos);
-
-                attributeDescriptions[1].binding = 0;
-                attributeDescriptions[1].location = 1;
-                attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-                attributeDescriptions[1].offset = offsetof(Vertex, color);
-
-                attributeDescriptions[2].binding = 0;
-                attributeDescriptions[2].location = 2;
-                attributeDescriptions[2].format = VK_FORMAT_R32G32_SFLOAT;
-                attributeDescriptions[2].offset = offsetof(Vertex, texCoord);
-
-                return attributeDescriptions;
-            }
-            
-            bool operator==(const Vertex& other) const {
-                return pos == other.pos && color == other.color && texCoord == other.texCoord;
-            }
-        };
 
     protected:
         GLFWwindow *_window;
         VkSurfaceKHR _surface;
         VkInstance _instance;
+    
         VkRenderPass _renderPass;
     
         VkSampleCountFlagBits _msaaSamples = VK_SAMPLE_COUNT_1_BIT;
@@ -230,9 +176,6 @@ class App {
         void createLogicalDevice();
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
-    
-        // Queue Families
-        QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
         // Validation layers (not available on MacOS)
         bool checkValidationLayerSupport();
@@ -308,15 +251,5 @@ class App {
         VkSampleCountFlagBits getMaxUsableSampleCount();
         void createColorResources();
 };
-
-namespace std {
-    template<> struct hash<App::Vertex> {
-        size_t operator()(App::Vertex const& vertex) const {
-            return ((hash<glm::vec3>()(vertex.pos) ^
-                   (hash<glm::vec3>()(vertex.color) << 1)) >> 1) ^
-                   (hash<glm::vec2>()(vertex.texCoord) << 1);
-        }
-    };
-}
 
 #endif
