@@ -8,6 +8,7 @@
 #ifndef _ETIB_APP_HPP_
 #define _ETIB_APP_HPP_
 
+    #include <vulkan/vulkan.h>
     #include "Utils.hpp"
     #include "Version.hpp"
 
@@ -82,6 +83,8 @@ class App {
         GLFWwindow *_window;
         VkSurfaceKHR _surface;
         VkInstance _instance;
+        VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
+        VkDevice _logicalDevice;
     
         VkRenderPass _renderPass;
     
@@ -135,9 +138,6 @@ class App {
         VkFormat _swapChainImageFormat;
         VkExtent2D _swapChainExtent;
         std::vector<VkImageView> _swapChainImageViews;
-
-        VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
-        VkDevice _logicalDevice;
     
         VkQueue _graphicsQueue;
         VkQueue _presentQueue;
